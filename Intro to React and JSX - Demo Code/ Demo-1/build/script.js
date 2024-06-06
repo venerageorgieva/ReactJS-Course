@@ -17,25 +17,51 @@ var root = ReactDOM.createRoot(rootDomElement);
 //   reactSecondHeading
 // );
 
+
+// const Footer = () => {
+//     return React.createElement(
+//         'div',
+//         {className:"site-header"},
+//         React.createElement('p',{},"All rights reserved"),
+//     );
+// }
+
+var Footer = function Footer() {
+    return React.createElement(
+        "div",
+        { className: "site-footer" },
+        React.createElement(
+            "p",
+            null,
+            "All rights reserved "
+        )
+    );
+};
+
 // JSX Syntax
-var headerJSX = React.createElement(
-    "header",
-    { className: "site-header" },
+var body = React.createElement(
+    "div",
+    null,
     React.createElement(
-        "h1",
-        null,
-        "Hello fromJSX"
+        "header",
+        { className: "site-header" },
+        React.createElement(
+            "h1",
+            null,
+            "Hello fromJSX"
+        ),
+        React.createElement(
+            "h2",
+            null,
+            "The best syntax ever!"
+        ),
+        React.createElement(
+            "p",
+            null,
+            "something else here"
+        )
     ),
-    React.createElement(
-        "h2",
-        null,
-        "The best syntax ever!"
-    ),
-    React.createElement(
-        "p",
-        null,
-        "something else here"
-    )
+    React.createElement(Footer, null)
 );
 
-root.render(headerJSX);
+root.render(body);
