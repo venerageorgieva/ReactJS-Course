@@ -1,15 +1,22 @@
-import './App.css';
+import React, { useState } from "react";
+import "./App.css";
 
-function App(){
-  let numbers = [1,2,3,4,5];
-  let doubled = numbers.map(number => <li key={number}>{number * 2}</li> );
+function App() {
+  const [numbers, setNumbers] = useState([1, 2, 3, 4, 5]);
+  const onClick = () => {
+    setNumbers((oldState) => oldState.slice(1));
+  };
 
-  return(
-    <ul>
-    {doubled}
-    </ul>
-  )
-
+  return (
+    <div>
+      <ul>
+        {numbers.map((number, index) => (
+          <li data-key={index} key={index}>{number * 2}</li>
+        ))}
+      </ul>
+      <button onClick={onClick}>Remove</button>
+    </div>
+  );
 }
 
-export default App
+export default App;
