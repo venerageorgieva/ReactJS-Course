@@ -1,15 +1,42 @@
 import UserListItem from "./UserListItem.jsx";
 import { useEffect, useState } from "react";
 import * as UserService from "../services/userService.js";
-
+import CreateUserModal from "./createUserModal.jsx";
 const UserListTable = () => {
   const [users, setUsers] = useState([]);
+  const [showCreate, setShowCreate] = useState(false);
   useEffect(() => {
-    UserService.getAll().then((result) => setUsers(result));
+    UserService.getAll()
+      .then((result) => setUsers(result))
+      .catch((err) => console.log(err));
   }, []);
+
+  const createUserClickHandler = () => {
+    setShowCreate(true);
+  };
+
+  const hideCreateUserModal = () => {
+    setShowCreate(false);
+  };
+
+  const userCreateHandler = async (e) => {
+    e.preventDefault();
+    const data = Object.fromEntries(new FormData(e.currentTarget));
+    const newUser = await UserService.create(data);
+    setUsers(state => [...state,newUser]);
+    setShowCreate(false);
+  };
 
   return (
     <div className='table-wrapper'>
+      {showCreate && (
+        <CreateUserModal
+          hideModal={hideCreateUserModal}
+          onClose={hideCreateUserModal}
+          onUserCreate={userCreateHandler}
+        />
+      )}
+
       <table className='table'>
         <thead>
           <tr>
@@ -121,6 +148,10 @@ const UserListTable = () => {
           ))}
         </tbody>
       </table>
+
+      <button className='btn-add btn' onClick={createUserClickHandler}>
+        Add new user
+      </button>
     </div>
   );
 };
