@@ -1,11 +1,11 @@
-function App() {
-  const [count, setCount] = useState(0)
+import Header from "./components/header/Header.jsx";
 
+function App() {
   return (
-    <>
-<h1>Hello world</h1>
-    </>
-  )
+    <div id='box'>
+      <Header />
+    </div>
+  );
 }
 
-export default App
+export default App;
