@@ -15,6 +15,8 @@ import GameDetails from "./components/game-details/GameDetails.jsx";
 function App() {
   const navigate = useNavigate();
   const [auth,setAuth]= useState({});
+
+
   const loginSubmitHandler = async (values) =>{
    const result = await authService.login(values.email,values.password)
    
@@ -23,8 +25,20 @@ function App() {
    navigate(Path.Home)
   }
 
+  const registerSubmitHandler = async (values) => {
+    console.log(values);
+  }
+
+  const values = {
+    loginSubmitHandler,
+    registerSubmitHandler,
+    username:auth.username,
+    email:auth.email,
+    isAuthenticated: !!auth.username,
+  }
+
   return (
-   < AuthContext.Provider value={{loginSubmitHandler}}>
+   < AuthContext.Provider value={values}>
     <div id='box'>
       <Header />
       <Routes>
